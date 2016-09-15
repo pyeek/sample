@@ -49,9 +49,9 @@ class StreamLimitTracker(object):
             with the user object doesn't reach deep into the user object, I have chosen the user object as
             the primary dependency in terms of the API's "usability"
 
-            The methods here are typically kept very short so that they are easily testable. I believe in
-            writing testable code and method size and the ability to pass dependencies enables the developer
-            to do so. 
+            The methods here are typically kept very short so that they are easily testable and readable.
+            I believe in writing testable code and method size and the ability to pass dependencies enables
+            the developer to do so. 
 
             Having said that, you may find it odd that the user is passed in every method. Normally, given
             that the user object is already injected into the __init__ method, there is no reason to not just
