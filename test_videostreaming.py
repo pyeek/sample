@@ -4,15 +4,23 @@ from mock import Mock
 
 class TestStreamLimitTracker(unittest.TestCase):
     def import_sut(self):
+        # Having the import statement here helps isolate import errors
         from videostreaming import StreamLimitTracker
         return StreamLimitTracker
 
     def create_subscription(self, limit):
+        """
+        Test helper to create a mock subscription and
+        sets the limit
+        """
         sub = Mock()
         sub.get_stream_limit.return_value = limit
         return sub
 
     def create_cache(self, test_user_id, num_keys):
+        """
+        Test helper to create a mock cache
+        """
         StreamLimitTracker = self.import_sut()
         test_cache = Mock()
         test_cache.iter_keys.return_value = [
@@ -219,6 +227,8 @@ class TestStreamLimitTracker(unittest.TestCase):
         key_count = 0
         test_user.subscriptions = [self.create_subscription(test_sub_limit)]
 
+        # This dummy cache allows for state which the test mock above doesn't
+        # allow for. This helps in testing the returning of the list of keys
         class DummyCache(object):
             def __init__(self):
                 self._cache = {}
